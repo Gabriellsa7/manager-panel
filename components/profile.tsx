@@ -1,31 +1,37 @@
-import Image from "next/image";
-import { FiSettings } from "react-icons/fi";
-import { MdOutlineEdit } from "react-icons/md";
-import boruto from "../public/assets/boruto.jpeg";
+"use client";
+
+import ProfileAvatar from "@/components/profile-avatar";
+import { useAuth } from "@/context/auth-context";
 
 export default function Profile() {
+  const { user, updateUser } = useAuth();
+
+  const handleUploadAvatar = async (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const response = await fetch("http://localhost:3001/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    updateUser({ imageUrl: `http://localhost:3001${data.url}` });
+  };
+
+  if (!user) return null;
+
   return (
-    <div className="flex flex-col items-center text-center gap-2 mt-4">
-      <div className="relative">
-        <Image
-          src={boruto}
-          width={80}
-          alt="Boruto Image"
-          className="rounded-full"
-        />
-        <div className="absolute -bottom-1 left-4 flex gap-1">
-          <button className="bg-blue-600 text-white p-1 rounded-full">
-            <FiSettings size={14} />
-          </button>
-        </div>
-        <div className="absolute -bottom-1 right-4 flex gap-1">
-          <button className="bg-sky-500 text-white p-1 rounded-full">
-            <MdOutlineEdit size={14} />
-          </button>
-        </div>
-      </div>
-      <h2 className="text-sm font-semibold">Outsutsuki Boruto</h2>
-      <span className="text-xs text-white">Admin</span>
+    <div className="flex flex-col items-center text-center gap-3 mt-6">
+      <ProfileAvatar
+        uri={user.imageUrl ?? null}
+        name={user.name}
+        onUpload={handleUploadAvatar}
+      />
+
+      <h2 className="text-sm font-semibold text-white">{user.name}</h2>
+
+      <span className="text-xs text-zinc-400">Admin</span>
     </div>
   );
 }
