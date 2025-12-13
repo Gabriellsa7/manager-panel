@@ -11,15 +11,16 @@ import {
 } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import Profile from "./profile";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
   const pathname = usePathname();
-  const router = useRouter();
+
   const params = useParams();
 
   const barbershopId = params.id;
@@ -29,7 +30,7 @@ export default function Sidebar() {
 
     const timer = setTimeout(() => {
       setShowProfile(true);
-    }, 200);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, [open]);
@@ -53,66 +54,54 @@ export default function Sidebar() {
     >
       <nav className="flex flex-col gap-4">
         {showProfile && <Profile />}
-        <button onClick={() => router.push(`/barbershop/${barbershopId}/home`)}>
+        <Link href={`/barbershop/${barbershopId}/home`}>
           <MenuItem
             icon={FaHome}
             text="Home"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/home`}
           />
-        </button>
-        <button
-          onClick={() => router.push(`/barbershop/${barbershopId}/dashboard`)}
-        >
+        </Link>
+        <Link href={`/barbershop/${barbershopId}/dashboard`}>
           <MenuItem
             icon={FaChartLine}
             text="Dashboard"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/dashboard`}
           />
-        </button>
-        <button
-          onClick={() =>
-            router.push(`/barbershop/${barbershopId}/appointments`)
-          }
-        >
+        </Link>
+        <Link href={`/barbershop/${barbershopId}/appointments`}>
           <MenuItem
             icon={FaCalendar}
             text="Appointments"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/appointments`}
           />
-        </button>
-        <button
-          onClick={() => router.push(`/barbershop/${barbershopId}/services`)}
-        >
+        </Link>
+        <Link href={`/barbershop/${barbershopId}/services`}>
           <MenuItem
             icon={FaBriefcase}
             text="Services"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/services`}
           />
-        </button>
-        <button
-          onClick={() => router.push(`/barbershop/${barbershopId}/employees`)}
-        >
+        </Link>
+        <Link href={`/barbershop/${barbershopId}/employees`}>
           <MenuItem
             icon={FaUserTie}
             text="Employees"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/employees`}
           />
-        </button>
-        <button
-          onClick={() => router.push(`/barbershop/${barbershopId}/settings`)}
-        >
+        </Link>
+        <Link href={`/barbershop/${barbershopId}/settings`}>
           <MenuItem
             icon={IoMdSettings}
             text="Settings"
             open={open}
             active={pathname === `/barbershop/${barbershopId}/settings`}
           />
-        </button>
+        </Link>
       </nav>
       <button onClick={toggleSidebar} className="hover:bg-purple-600">
         {open ? (
@@ -146,7 +135,13 @@ function MenuItem({
       `}
     >
       <Icon className={`text-xl ${active ? "text-purple-600" : ""}`} />
-      {open && <span className="whitespace-nowrap">{text}</span>}
+      {open && (
+        <span
+          className={`whitespace-nowrap ${active ? "text-purple-600" : ""}`}
+        >
+          {text}
+        </span>
+      )}
     </div>
   );
 }
