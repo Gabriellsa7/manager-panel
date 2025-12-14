@@ -5,9 +5,12 @@ import { useBarbershopManager } from "@/hooks/useBarbershopManager";
 import Image from "next/image";
 import { useAuth } from "@/context/auth-context";
 import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const { user } = useAuth();
+  const router = useRouter();
+
   const params = useParams();
 
   const ownerId = user?.id || (params?.id as string);
@@ -104,6 +107,15 @@ export default function Home() {
 
             <p className="font-semibold dark:text-white">{b.name}</p>
             <p className="text-sm text-zinc-500">{b.address}</p>
+
+            <button
+              onClick={() =>
+                router.push(`/barbershop/${b.id}/barbershop-details`)
+              }
+              className="mt-3 w-full bg-zinc-800 hover:bg-zinc-700 text-white py-2 rounded-lg text-sm font-medium"
+            >
+              Ver detalhes
+            </button>
           </div>
         ))}
       </div>
