@@ -91,7 +91,7 @@ export default function BarbershopDetails() {
 
   return (
     <>
-      <div className="min-h-screen bg-zinc-50 dark:bg-black">
+      <div className="h-screen flex flex-col bg-zinc-50 dark:bg-black">
         {barbershop.image_url && (
           <div className="relative w-full h-75">
             <Image
@@ -105,7 +105,7 @@ export default function BarbershopDetails() {
         )}
 
         {/* INFO */}
-        <div className="p-8 max-w-4xl mx-auto space-y-4">
+        <div className="p-8 max-w-4xl mx-auto flex flex-col flex-1 space-y-4">
           <h1 className="text-2xl font-bold">{barbershop.name}</h1>
 
           <p className="text-zinc-500">{barbershop.address}</p>
@@ -122,55 +122,61 @@ export default function BarbershopDetails() {
           {/* SERVIÇOS */}
           <h2 className="text-lg font-semibold">Services</h2>
 
-          {services.length === 0 && (
-            <p className="text-red-500">Service not found</p>
-          )}
+          <div className="flex flex-col h-[calc(100vh-480px)]">
+            {services.length === 0 && (
+              <p className="text-red-500">Service not found</p>
+            )}
 
-          <div className="space-y-4">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="flex gap-4 bg-zinc-900 p-4 rounded-xl"
-              >
-                {service.image_url && (
-                  <Image
-                    src={service.image_url}
-                    alt={service.name}
-                    width={90}
-                    height={80}
-                    className="rounded-lg object-cover"
-                    unoptimized
-                  />
-                )}
+            {/* LISTA COM SCROLL */}
+            <div className="flex-1 space-y-4 overflow-y-auto custom-scroll pr-2 pb-6">
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className="flex gap-4 bg-zinc-900 p-4 rounded-xl"
+                >
+                  {service.image_url && (
+                    <Image
+                      src={service.image_url}
+                      alt={service.name}
+                      width={90}
+                      height={80}
+                      className="rounded-lg object-cover"
+                      unoptimized
+                    />
+                  )}
 
-                <div className="flex-1">
-                  <h3 className="font-bold">{service.name}</h3>
-                  <p className="text-zinc-400 text-sm">{service.description}</p>
+                  <div className="flex-1">
+                    <h3 className="font-bold">{service.name}</h3>
+                    <p className="text-zinc-400 text-sm">
+                      {service.description}
+                    </p>
 
-                  <div className="flex justify-between items-center mt-2">
-                    <span className="text-purple-400 font-bold">
-                      R$ {service.price}
-                    </span>
+                    <div className="flex justify-between items-center mt-2">
+                      <span className="text-purple-400 font-bold">
+                        R$ {service.price}
+                      </span>
 
-                    <button className="bg-zinc-800 px-4 py-2 rounded-lg">
-                      Reservar
-                    </button>
+                      <button className="bg-zinc-800 px-4 py-2 rounded-lg">
+                        Reservar
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {isOwner && (
-            <div className="mt-10">
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="bg-purple-600 px-6 py-3 rounded-lg"
-              >
-                Add Barbershop Service
-              </button>
+              ))}
             </div>
-          )}
+
+            {/* BOTÃO FIXO */}
+            {isOwner && (
+              <div className="pt-4 border-t border-zinc-800">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="w-full bg-purple-600 px-6 py-3 rounded-lg"
+                >
+                  Add Barbershop Service
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {isModalOpen && (

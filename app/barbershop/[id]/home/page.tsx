@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen p-8 bg-zinc-50 dark:bg-black">
+    <div className="h-screen overflow-hidden p-8 bg-zinc-50 dark:bg-black">
       <h1 className="text-2xl font-bold mb-6 dark:text-white">Panel Manager</h1>
 
       <div className="max-w-md bg-white dark:bg-zinc-900 p-6 rounded-xl shadow mb-10">
@@ -86,7 +86,7 @@ export default function Home() {
         </button>
       </div>
 
-      <div className="max-w-2xl space-y-4">
+      <div className="max-w-2xl space-y-4 h-[calc(100vh-420px)] overflow-y-auto custom-scroll pr-2 pb-20">
         {barbershops.map((b) => (
           <div
             key={b.id}
