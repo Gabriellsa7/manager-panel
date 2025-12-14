@@ -1,3 +1,5 @@
+"use client";
+
 import Sidebar from "@/components/side-bar";
 
 export default function BarbershopLayout({
