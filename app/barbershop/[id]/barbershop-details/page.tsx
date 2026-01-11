@@ -92,20 +92,19 @@ export default function BarbershopDetails() {
   return (
     <>
       <div className="h-screen flex flex-col bg-zinc-50 dark:bg-black">
-        {barbershop.image_url && (
-          <div className="relative w-full h-75">
-            <Image
-              src={barbershop.image_url}
-              alt={barbershop.name}
-              fill
-              className="object-cover"
-              unoptimized
-            />
-          </div>
-        )}
-
-        {/* INFO */}
-        <div className="p-8 max-w-4xl mx-auto flex flex-col flex-1 space-y-4">
+        <div className="p-8 flex flex-col flex-1 ">
+          {barbershop.image_url && (
+            <div className="w-full">
+              <Image
+                src={barbershop.image_url}
+                alt={barbershop.name}
+                width={200}
+                height={200}
+                className="w-full h-60 object-cover rounded-xl"
+                unoptimized
+              />
+            </div>
+          )}
           <h1 className="text-2xl font-bold">{barbershop.name}</h1>
 
           <p className="text-zinc-500">{barbershop.address}</p>
@@ -119,20 +118,18 @@ export default function BarbershopDetails() {
 
           <div className="border-t border-zinc-700 my-6" />
 
-          {/* SERVIÇOS */}
           <h2 className="text-lg font-semibold">Services</h2>
 
-          <div className="flex flex-col h-[calc(100vh-480px)]">
+          <div className="flex flex-col gap-2">
             {services.length === 0 && (
               <p className="text-red-500">Service not found</p>
             )}
 
-            {/* LISTA COM SCROLL */}
-            <div className="flex-1 space-y-4 overflow-y-auto custom-scroll pr-2 pb-6">
+            <div className="flex gap-2 overflow-y-auto custom-scroll pr-2 pb-6">
               {services.map((service) => (
                 <div
                   key={service.id}
-                  className="flex gap-4 bg-zinc-900 p-4 rounded-xl"
+                  className="flex gap-4 bg-zinc-900 p-4 rounded-xl min-w-[320px]"
                 >
                   {service.image_url && (
                     <Image
@@ -165,7 +162,6 @@ export default function BarbershopDetails() {
               ))}
             </div>
 
-            {/* BOTÃO FIXO */}
             {isOwner && (
               <div className="pt-4 border-t border-zinc-800">
                 <button
