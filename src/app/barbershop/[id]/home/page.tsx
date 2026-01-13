@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useGetBarbershopByOwner } from "@/src/api/get-barbershop";
 import { useCreateBarbershop } from "@/src/api/create-barbershop";
+import { normalizeImageUrl } from "@/src/api/normalize-image-url";
 
 export default function Home() {
   const { user } = useAuth();
@@ -103,7 +104,7 @@ export default function Home() {
             {b.image_url && (
               <div className="relative w-full h-40 mb-3">
                 <Image
-                  src={b.image_url}
+                  src={normalizeImageUrl(b.image_url)!}
                   alt={b.name}
                   fill
                   className="object-cover rounded-lg"
