@@ -12,7 +12,7 @@ interface GetBarbershopByOwnerParams {
 export const getBarbershopByOwner = async ({
   ownerId,
 }: GetBarbershopByOwnerParams): Promise<Barbershop[]> => {
-  const path = `/api/barbershop/owner/${ownerId}`;
+  const path = `/barbershop/owner/${ownerId}`;
 
   try {
     const response = await httpRequest.get<Barbershop[]>(path);
