@@ -1,4 +1,4 @@
-import { AuthProvider } from "@/context/auth-context";
+import { AuthProvider } from "@/src/context/auth-context";
 import "./globals.css";
 
 export default function RootLayout({

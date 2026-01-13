@@ -1,7 +1,7 @@
 "use client";
 
-import ProfileAvatar from "@/components/profile-avatar";
-import { useAuth } from "@/context/auth-context";
+import ProfileAvatar from "@/src/components/profile-avatar";
+import { useAuth } from "@/src/context/auth-context";
 
 export default function Profile() {
   const { user, updateUser } = useAuth();

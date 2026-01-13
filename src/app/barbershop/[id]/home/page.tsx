@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useBarbershopManager } from "@/hooks/useBarbershopManager";
+import { useBarbershopManager } from "@/src/hooks/useBarbershopManager";
 import Image from "next/image";
-import { useAuth } from "@/context/auth-context";
+import { useAuth } from "@/src/context/auth-context";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 

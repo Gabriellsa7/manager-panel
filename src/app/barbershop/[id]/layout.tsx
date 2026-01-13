@@ -1,6 +1,6 @@
 "use client";
 
-import Sidebar from "@/components/side-bar";
+import Sidebar from "@/src/components/side-bar";
 
 export default function BarbershopLayout({
   children,

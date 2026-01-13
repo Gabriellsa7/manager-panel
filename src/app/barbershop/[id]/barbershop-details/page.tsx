@@ -1,7 +1,7 @@
 "use client";
 
-import BarbershopServiceModal from "@/components/BarbershopServiceModal";
-import { useAuth } from "@/context/auth-context";
+import BarbershopServiceModal from "@/src/components/BarbershopServiceModal";
+import { useAuth } from "@/src/context/auth-context";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
