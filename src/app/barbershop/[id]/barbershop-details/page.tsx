@@ -24,7 +24,7 @@ type Service = {
   image_url?: string | null;
 };
 
-const BASE_URL = "http://192.168.0.17:3001";
+const BASE_URL = "http://localhost:3001";
 
 export default function BarbershopDetails() {
   const { id } = useParams();

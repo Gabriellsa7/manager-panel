@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useBarbershopManager } from "@/src/hooks/useBarbershopManager";
 import Image from "next/image";
 import { useAuth } from "@/src/context/auth-context";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { useGetBarbershopByOwner } from "@/src/api/get-barbershop";
+import { useCreateBarbershop } from "@/src/api/create-barbershop";
 
 export default function Home() {
   const { user } = useAuth();
@@ -15,17 +16,19 @@ export default function Home() {
 
   const ownerId = user?.id || (params?.id as string);
 
-  const { barbershops, loading, createBarbershop } =
-    useBarbershopManager(ownerId);
-
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
 
+  const { data: barbershops = [], isLoading: isLoadingBarbershops } =
+    useGetBarbershopByOwner({ ownerId }, { enabled: !!ownerId });
+
+  const { mutateAsync: createBarbershop } = useCreateBarbershop();
+
   const handleSubmit = async () => {
-    if (!name || !address) {
-      alert("Nome e endereço obrigatórios");
+    if (!name || !address || !ownerId) {
+      alert("Nome, endereço e ownerId obrigatórios");
       return;
     }
 
@@ -34,6 +37,7 @@ export default function Home() {
       address,
       description,
       imageFile,
+      ownerId,
     });
 
     setName("");
@@ -41,6 +45,10 @@ export default function Home() {
     setDescription("");
     setImageFile(null);
   };
+
+  if (isLoadingBarbershops) {
+    return <p>Carregando...</p>;
+  }
 
   return (
     <div className="h-screen overflow-hidden p-8 bg-zinc-50 dark:bg-black">
@@ -79,10 +87,10 @@ export default function Home() {
 
         <button
           onClick={handleSubmit}
-          disabled={loading}
+          disabled={isLoadingBarbershops}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded"
         >
-          {loading ? "Salvando..." : "Criar"}
+          {isLoadingBarbershops ? "Salvando..." : "Criar"}
         </button>
       </div>
 
