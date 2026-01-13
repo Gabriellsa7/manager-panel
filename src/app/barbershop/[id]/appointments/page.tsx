@@ -11,19 +11,19 @@ export default function AppointmentPage() {
     data: barbershopData,
     isLoading: isLoadingBarbershop,
     error: barbershopError,
-  } = useGetBarbershopByOwner(
-    { ownerId: user?.id as string },
-    { enabled: !!user?.id }
-  );
+  } = useGetBarbershopByOwner({ ownerId: user?.id as string });
+
+  const barbershop = barbershopData?.[0];
 
   const {
     data: appointmentsData,
     isLoading: isLoadingAppointments,
     error: appointmentsError,
-  } = useGetAppointmentsByBarbershop(
-    { barbershopId: barbershopData?.id as string },
-    { enabled: !!barbershopData?.id }
-  );
+  } = useGetAppointmentsByBarbershop({
+    barbershopId: barbershop?.id as string,
+  });
+
+  console.log("appointmentsData DATA:", appointmentsData);
 
   if (isLoadingBarbershop || isLoadingAppointments) {
     return <p>Loading...</p>;
