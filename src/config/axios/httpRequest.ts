@@ -6,15 +6,3 @@ export const httpRequest = axios.create({
     "Content-Type": "application/json",
   },
 });
-
-httpRequest.interceptors.request.use((config) => {
-  if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-  }
-
-  return config;
-});
