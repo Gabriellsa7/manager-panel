@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeImageUrl } from "@/src/api/normalize-image-url";
 import BarbershopServiceModal from "@/src/components/BarbershopServiceModal";
 import { useAuth } from "@/src/context/auth-context";
 import Image from "next/image";
@@ -133,7 +134,7 @@ export default function BarbershopDetails() {
                 >
                   {service.image_url && (
                     <Image
-                      src={service.image_url}
+                      src={normalizeImageUrl(service.image_url)!}
                       alt={service.name}
                       width={90}
                       height={80}
