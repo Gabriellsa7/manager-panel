@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useGetBarbershopByOwner } from "@/src/api/get-barbershop";
 import { useCreateBarbershop } from "@/src/api/create-barbershop";
-import { normalizeImageUrl } from "@/src/api/normalize-image-url";
+import { normalizeImageUrl } from "@/src/hooks/normalize-image-url";
 
 export default function Home() {
   const { user } = useAuth();

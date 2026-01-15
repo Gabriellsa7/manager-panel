@@ -1,6 +1,6 @@
 "use client";
 
-import { normalizeImageUrl } from "@/src/api/normalize-image-url";
+import { normalizeImageUrl } from "@/src/hooks/normalize-image-url";
 import BarbershopServiceModal from "@/src/components/BarbershopServiceModal";
 import { useAuth } from "@/src/context/auth-context";
 import Image from "next/image";
