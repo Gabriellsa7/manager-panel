@@ -1,21 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { MdOutlineEdit } from "react-icons/md";
 
 type ProfileAvatarProps = {
-  uri?: string | null;
+  image_url?: string | null;
   name: string;
   onUpload?: (file: File) => void;
 };
 
 export default function ProfileAvatar({
-  uri,
+  image_url,
   name,
   onUpload,
 }: ProfileAvatarProps) {
-  const [imageError, setImageError] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const getInitials = (fullName: string) => {
@@ -26,7 +25,6 @@ export default function ProfileAvatar({
   };
 
   const initials = getInitials(name);
-  const showImage = !!uri && !imageError;
 
   const handleClickUpload = () => {
     fileInputRef.current?.click();
@@ -39,17 +37,21 @@ export default function ProfileAvatar({
     }
   };
 
+  const isValidUrl =
+    typeof image_url === "string" &&
+    image_url.length > 0 &&
+    image_url.startsWith("http");
+
   return (
     <div className="relative flex flex-col items-center text-center gap-2 mt-4">
-      <div className=" w-20 h-20 rounded-full overflow-hidden border-2 border-white">
-        {showImage ? (
+      <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white">
+        {isValidUrl ? (
           <Image
-            src={uri!}
+            src={image_url}
             alt={name}
             width={80}
             height={80}
             className="rounded-full object-cover"
-            onError={() => setImageError(true)}
             unoptimized
           />
         ) : (
@@ -60,8 +62,10 @@ export default function ProfileAvatar({
           </div>
         )}
       </div>
+
       <div className="absolute top-1 right-0 z-10">
         <button
+          type="button"
           className="bg-sky-500 text-white p-1 rounded-full"
           onClick={handleClickUpload}
         >

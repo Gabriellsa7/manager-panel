@@ -16,7 +16,7 @@ export default function Profile() {
     });
 
     const data = await response.json();
-    updateUser({ imageUrl: `http://localhost:3001${data.url}` });
+    updateUser({ image_url: data.url });
   };
 
   if (!user) return null;
@@ -24,7 +24,7 @@ export default function Profile() {
   return (
     <div className="flex flex-col items-center text-center gap-3 mt-6">
       <ProfileAvatar
-        uri={user.imageUrl ?? null}
+        image_url={user.image_url ?? null}
         name={user.name}
         onUpload={handleUploadAvatar}
       />

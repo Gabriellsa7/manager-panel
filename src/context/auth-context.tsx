@@ -8,7 +8,7 @@ type User = {
   name: string;
   email: string;
   barbershopId?: string[];
-  imageUrl?: string | null;
+  image_url?: string | null;
 };
 
 type AuthContextProps = {
