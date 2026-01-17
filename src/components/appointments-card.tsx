@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { getDay } from "../hooks/get-day";
 import { getMonthName } from "../hooks/get-month-name";
-import { normalizeImageUrl } from "../hooks/normalize-image-url";
 
 interface AppointmentsCardProps {
   status: string;
@@ -22,8 +21,6 @@ export default function AppointmentsCard({
   startTime,
   className,
 }: AppointmentsCardProps) {
-  const imageUri = normalizeImageUrl(avatarUrl);
-
   return (
     <div
       className={`bg-[#1E1E26] rounded-xl p-4 mb-4 flex justify-between items-center ${
@@ -40,7 +37,7 @@ export default function AppointmentsCard({
 
         <div className="flex items-center gap-2">
           <Image
-            src={imageUri ?? "/boruto.jpeg"}
+            src={avatarUrl ?? "/boruto.jpeg"}
             alt={name}
             width={32}
             height={32}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAuth } from "@/src/context/auth-context";
 import { useParams } from "next/navigation";
@@ -21,11 +21,18 @@ export default function Home() {
   const [address, setAddress] = useState("");
   const [description, setDescription] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const { data: barbershops = [], isLoading: isLoadingBarbershops } =
     useGetBarbershopByOwner({ ownerId }, { enabled: !!ownerId });
 
   const { mutateAsync: createBarbershop } = useCreateBarbershop();
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   const handleSubmit = async () => {
     if (!name || !address || !ownerId) {
@@ -45,6 +52,7 @@ export default function Home() {
     setAddress("");
     setDescription("");
     setImageFile(null);
+    setPreview(null);
   };
 
   if (isLoadingBarbershops) {
@@ -89,11 +97,30 @@ export default function Home() {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+
+                if (file) {
+                  setImageFile(file);
+                  setPreview(URL.createObjectURL(file));
+                }
+              }}
               className="hidden"
             />
           </label>
         </div>
+
+        {preview && (
+          <div className="relative w-full h-40 mb-4">
+            <Image
+              src={preview}
+              alt="Preview"
+              fill
+              className="object-cover rounded-lg"
+              unoptimized
+            />
+          </div>
+        )}
 
         <button
           onClick={handleSubmit}
