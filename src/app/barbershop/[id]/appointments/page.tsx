@@ -50,7 +50,7 @@ export default function AppointmentPage() {
             service={
               services?.length && services.length > 0
                 ? services.map((s) => s.service.name).join(", ")
-                : "Serviço não informado"
+                : "Service not reported"
             }
             status={appointment.status}
             avatarUrl={appointment.barbershop?.image_url}

@@ -155,7 +155,7 @@ export default function BarbershopDetails() {
                       </span>
 
                       <button className="bg-zinc-800 px-4 py-2 rounded-lg">
-                        Reservar
+                        See Details
                       </button>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ export default function Home() {
 
   const handleSubmit = async () => {
     if (!name || !address || !ownerId) {
-      alert("Nome, endereço e ownerId obrigatórios");
+      alert("Name, address, and ownerId are required.");
       return;
     }
 
@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   if (isLoadingBarbershops) {
-    return <p>Carregando...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
@@ -56,7 +56,9 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-6 dark:text-white">Panel Manager</h1>
 
       <div className="max-w-md bg-white dark:bg-zinc-900 p-6 rounded-xl shadow mb-10">
-        <h2 className="font-semibold mb-4 dark:text-white">Criar Barbearia</h2>
+        <h2 className="font-semibold mb-4 dark:text-white">
+          Create a Barber Shop
+        </h2>
 
         <input
           className="w-full mb-3 px-4 py-2 rounded bg-zinc-100 dark:bg-zinc-800 dark:text-white"
@@ -123,7 +125,7 @@ export default function Home() {
               }
               className="mt-3 w-full bg-zinc-800 hover:bg-zinc-700 text-white py-2 rounded-lg text-sm font-medium"
             >
-              Ver detalhes
+              See Details
             </button>
           </div>
         ))}
