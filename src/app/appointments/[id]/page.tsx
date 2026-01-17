@@ -13,6 +13,9 @@ import { IoArrowBack } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useUpdateAppointmentStatus } from "@/src/api/update-appointment-status";
 import { useQueryClient } from "@tanstack/react-query";
+import { APPOINTMENT_STATUS } from "@/src/constants/appointment-status";
+import { BiCalendar } from "react-icons/bi";
+import { TbClockHour2 } from "react-icons/tb";
 
 export default function AppointmentDetailsPage() {
   const { id } = useParams();
@@ -82,45 +85,75 @@ export default function AppointmentDetailsPage() {
             <IoArrowBack size={20} />
           </button>
         </div>
-        <div>
-          <h1 className="text-white text-2xl font-bold">
-            {appointment.barbershop.name}
-          </h1>
-
-          <p className="text-white mb-2">Status: {appointment.status}</p>
-
-          <p className="text-white mb-2">
-            {getDay(appointment.date)} {getMonthName(appointment.date)}
-          </p>
-
-          <p className="text-white mb-4">
-            {appointment.startTime} - {appointment.endTime}
-          </p>
-
+        <div className="p-5">
           <div className="flex flex-col gap-2">
+            <h1 className="text-white text-2xl font-bold">
+              {appointment.barbershop.name}
+            </h1>
+            <div className="flex items-center gap-2">
+              {(() => {
+                const {
+                  label,
+                  icon: Icon,
+                  color,
+                } = APPOINTMENT_STATUS[appointment.status];
+
+                return (
+                  <>
+                    <Icon size={18} className={color} />
+                    <span className="text-white font-medium">{label}</span>
+                  </>
+                );
+              })()}
+            </div>
+            <div className="flex items-center gap-2">
+              <BiCalendar size={18} color="white" />
+              <p className="text-white">
+                {getDay(appointment.date)} {getMonthName(appointment.date)}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <TbClockHour2 size={18} color="white" />
+              <p className="text-white">
+                {appointment.startTime} - {appointment.endTime}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex gap-2 overflow-y-auto custom-scroll pr-2 pb-6">
             {appointment.appointmentservice &&
               appointment.appointmentservice.map((item) => (
                 <div
-                  key={item.service.id}
-                  className="flex items-center gap-3 bg-[#1E1E26] p-3 rounded-lg"
+                  key={item.appointmentId}
+                  className="flex gap-4 bg-zinc-900 p-4 rounded-xl min-w-[320px]"
                 >
                   <Image
                     src={item.service.image_url}
                     alt={item.service.name}
-                    width={32}
-                    height={32}
+                    width={200}
+                    height={200}
+                    className="rounded-lg object-cover"
+                    unoptimized
                   />
-                  <div>
-                    <p className="text-white font-bold">{item.service.name}</p>
-                    <p className="text-sm text-gray-400">
-                      ${item.service.price} • {item.service.durationMinutes} min
-                    </p>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-white">
+                      {item.service.name}
+                    </h3>
+                    {/* <p className="text-zinc-400 text-sm">{item.service.description}</p> */}
+                    <div className="flex flex-col gap-3 items-center mt-2">
+                      <span className="text-purple-400 font-bold">
+                        ${item.service.price}
+                      </span>
+                      <span className="text-purple-400 font-bold">
+                        {item.service.durationMinutes} min
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
           </div>
         </div>
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-3 px-5">
           <button
             onClick={() => handleUpdateStatus("CONFIRMED")}
             disabled={isPending}

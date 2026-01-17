@@ -144,7 +144,7 @@ export default function BarbershopDetails() {
                   )}
 
                   <div className="flex-1">
-                    <h3 className="font-bold">{service.name}</h3>
+                    <h3 className="font-bold text-white">{service.name}</h3>
                     <p className="text-zinc-400 text-sm">
                       {service.description}
                     </p>
@@ -154,7 +154,7 @@ export default function BarbershopDetails() {
                         R$ {service.price}
                       </span>
 
-                      <button className="bg-zinc-800 px-4 py-2 rounded-lg">
+                      <button className="bg-[#26272B] px-4 py-2 rounded-lg text-white">
                         See Details
                       </button>
                     </div>
