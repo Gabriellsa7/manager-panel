@@ -1,8 +1,10 @@
 import Image from "next/image";
 import { getDay } from "../hooks/get-day";
 import { getMonthName } from "../hooks/get-month-name";
+import Link from "next/link";
 
 interface AppointmentsCardProps {
+  id: string;
   status: string;
   service: string;
   name: string;
@@ -18,40 +20,43 @@ export default function AppointmentsCard({
   avatarUrl,
   date,
   startTime,
+  id,
 }: AppointmentsCardProps) {
   return (
-    <div className="bg-[#1E1E26] rounded-xl p-4 mb-4 flex items-center justify-between">
-      {/* Left side */}
-      <div className="flex flex-col gap-3">
-        <div className="bg-[#251f42] rounded-full px-3 py-1 w-fit">
-          <span className="text-[#8162FF] font-bold text-sm">{status}</span>
+    <Link href={`/appointments/${id}`}>
+      <div className="bg-[#1E1E26] rounded-xl p-4 mb-4 flex items-center justify-between max-w-[420px]">
+        {/* Left side */}
+        <div className="flex flex-col gap-3">
+          <div className="bg-[#251f42] rounded-full px-3 py-1 w-fit">
+            <span className="text-[#8162FF] font-bold text-sm">{status}</span>
+          </div>
+
+          <h3 className="text-white font-bold text-xl">{service}</h3>
+
+          <div className="flex items-center gap-2">
+            <Image
+              src={avatarUrl ?? "/boruto.jpeg"}
+              alt={name}
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
+            <span className="text-white text-lg">{name}</span>
+          </div>
         </div>
 
-        <h3 className="text-white font-bold text-xl">{service}</h3>
+        <div className="w-px h-20 bg-[#2F2F3A] mx-4" />
 
-        <div className="flex items-center gap-2">
-          <Image
-            src={avatarUrl ?? "/boruto.jpeg"}
-            alt={name}
-            width={32}
-            height={32}
-            className="rounded-full"
-          />
-          <span className="text-white text-lg">{name}</span>
+        <div className="flex flex-col items-center gap-1 w-20">
+          <span className="text-[#838896] text-sm">{getMonthName(date)}</span>
+
+          <span className="text-white text-3xl font-bold">{getDay(date)}</span>
+
+          {startTime && (
+            <span className="text-[#838896] text-sm">{startTime}</span>
+          )}
         </div>
       </div>
-
-      <div className="w-px h-20 bg-[#2F2F3A] mx-4" />
-
-      <div className="flex flex-col items-center gap-1 w-20">
-        <span className="text-[#838896] text-sm">{getMonthName(date)}</span>
-
-        <span className="text-white text-3xl font-bold">{getDay(date)}</span>
-
-        {startTime && (
-          <span className="text-[#838896] text-sm">{startTime}</span>
-        )}
-      </div>
-    </div>
+    </Link>
   );
 }

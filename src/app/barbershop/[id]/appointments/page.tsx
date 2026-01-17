@@ -39,26 +39,32 @@ export default function AppointmentPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-[420px] w-full">
-      {appointmentsData.map((appointment) => {
-        const services = appointment.appointmentservice;
+    <div className="flex flex-col gap-6 p-4">
+      <span className="text-white text-center font-bold text-lg">
+        Appointments
+      </span>
+      <div className="grid grid-cols-3">
+        {appointmentsData.map((appointment) => {
+          const services = appointment.appointmentservice;
 
-        return (
-          <AppointmentsCard
-            key={appointment.id}
-            name={appointment.barbershop?.name || ""}
-            service={
-              services?.length && services.length > 0
-                ? services.map((s) => s.service.name).join(", ")
-                : "Service not reported"
-            }
-            status={appointment.status}
-            avatarUrl={appointment.barbershop?.image_url}
-            date={appointment.date}
-            startTime={appointment.startTime}
-          />
-        );
-      })}
+          return (
+            <AppointmentsCard
+              key={appointment.id}
+              id={appointment.id}
+              name={appointment.barbershop?.name || ""}
+              service={
+                services?.length && services.length > 0
+                  ? services.map((s) => s.service.name).join(", ")
+                  : "Service not reported"
+              }
+              status={appointment.status}
+              avatarUrl={appointment.barbershop?.image_url}
+              date={appointment.date}
+              startTime={appointment.startTime}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
