@@ -3,6 +3,10 @@
 import ProfileAvatar from "@/src/components/profile-avatar";
 import { useAuth } from "@/src/context/auth-context";
 
+type UploadResponse = {
+  url: string;
+};
+
 export default function Profile() {
   const { user, updateUser } = useAuth();
 
@@ -15,7 +19,7 @@ export default function Profile() {
       body: formData,
     });
 
-    const data = await response.json();
+    const data: UploadResponse = await response.json();
     updateUser({ image_url: data.url });
   };
 
