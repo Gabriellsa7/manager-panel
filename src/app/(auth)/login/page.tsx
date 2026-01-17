@@ -53,7 +53,7 @@ export default function Login() {
         </div>
 
         <div className="mb-6">
-          <label className="mb-1 block text-sm">Senha</label>
+          <label className="mb-1 block text-sm">Password</label>
           <input
             type="password"
             className="w-full rounded border p-2"
@@ -68,7 +68,7 @@ export default function Login() {
           disabled={loading}
           className="w-full rounded bg-black py-2 text-white disabled:opacity-60"
         >
-          {loading ? "Entrando..." : "Entrar"}
+          {loading ? "Entering..." : "Enter"}
         </button>
       </form>
     </div>

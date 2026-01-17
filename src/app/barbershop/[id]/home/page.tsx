@@ -62,38 +62,45 @@ export default function Home() {
 
         <input
           className="w-full mb-3 px-4 py-2 rounded bg-zinc-100 dark:bg-zinc-800 dark:text-white"
-          placeholder="Nome"
+          placeholder="Name"
+          id="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
 
         <input
           className="w-full mb-3 px-4 py-2 rounded bg-zinc-100 dark:bg-zinc-800 dark:text-white"
-          placeholder="Endereço"
+          placeholder="Address"
+          id="address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
 
         <textarea
           className="w-full mb-3 px-4 py-2 rounded bg-zinc-100 dark:bg-zinc-800 dark:text-white"
-          placeholder="Descrição"
+          placeholder="Description"
+          name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImageFile(e.target.files?.[0] || null)}
-          className="mb-4 text-sm text-zinc-500"
-        />
+        <div className="mb-4">
+          <label className="cursor-pointer text-white font-medium">
+            Select image
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+              className="hidden"
+            />
+          </label>
+        </div>
 
         <button
           onClick={handleSubmit}
           disabled={isLoadingBarbershops}
           className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded"
         >
-          {isLoadingBarbershops ? "Salvando..." : "Criar"}
+          {isLoadingBarbershops ? "Saving..." : "Create"}
         </button>
       </div>
 
