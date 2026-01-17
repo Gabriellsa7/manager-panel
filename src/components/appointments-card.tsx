@@ -2,10 +2,13 @@ import Image from "next/image";
 import { getDay } from "../hooks/get-day";
 import { getMonthName } from "../hooks/get-month-name";
 import Link from "next/link";
+import { AppointmentStatus } from "@/src/config/entities/appointments/appointments.types";
+import { statusBgMap } from "../constants/status-bg-map";
+import { statusTextMap } from "../constants/status-text-map";
 
 interface AppointmentsCardProps {
   id: string;
-  status: string;
+  status: AppointmentStatus;
   service: string;
   name: string;
   avatarUrl?: string | null;
@@ -27,8 +30,12 @@ export default function AppointmentsCard({
       <div className="bg-[#1E1E26] rounded-xl p-4 mb-4 flex items-center justify-between max-w-[420px]">
         {/* Left side */}
         <div className="flex flex-col gap-3">
-          <div className="bg-[#251f42] rounded-full px-3 py-1 w-fit">
-            <span className="text-[#8162FF] font-bold text-sm">{status}</span>
+          <div
+            className={`rounded-full px-3 py-1 w-fit ${statusBgMap[status]}`}
+          >
+            <span className={`font-bold text-sm ${statusTextMap[status]}`}>
+              {status}
+            </span>
           </div>
 
           <h3 className="text-white font-bold text-xl">{service}</h3>
