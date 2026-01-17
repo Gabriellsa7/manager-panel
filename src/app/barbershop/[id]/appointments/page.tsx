@@ -1,7 +1,7 @@
 "use client";
 
 import { useGetAppointmentsByBarbershop } from "@/src/api/get-appointments";
-import { useGetBarbershopByOwner } from "@/src/api/get-barbershop";
+import { useGetBarbershopByOwner } from "@/src/api/get-barbershop-by-owner";
 import AppointmentsCard from "@/src/components/appointments-card";
 import { useAuth } from "@/src/context/auth-context";
 
@@ -39,7 +39,7 @@ export default function AppointmentPage() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 max-w-[420px] w-full">
       {appointmentsData.map((appointment) => {
         const services = appointment.appointmentservice;
 
@@ -54,7 +54,6 @@ export default function AppointmentPage() {
             }
             status={appointment.status}
             avatarUrl={appointment.barbershop?.image_url}
-            className="w-full"
             date={appointment.date}
             startTime={appointment.startTime}
           />

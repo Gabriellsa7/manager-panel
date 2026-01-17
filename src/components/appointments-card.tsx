@@ -9,7 +9,6 @@ interface AppointmentsCardProps {
   avatarUrl?: string | null;
   date: Date | string;
   startTime?: string;
-  className?: string;
 }
 
 export default function AppointmentsCard({
@@ -19,14 +18,9 @@ export default function AppointmentsCard({
   avatarUrl,
   date,
   startTime,
-  className,
 }: AppointmentsCardProps) {
   return (
-    <div
-      className={`bg-[#1E1E26] rounded-xl p-4 mb-4 flex justify-between items-center ${
-        className ?? ""
-      }`}
-    >
+    <div className="bg-[#1E1E26] rounded-xl p-4 mb-4 flex items-center justify-between">
       {/* Left side */}
       <div className="flex flex-col gap-3">
         <div className="bg-[#251f42] rounded-full px-3 py-1 w-fit">

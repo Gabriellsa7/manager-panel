@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useAuth } from "@/src/context/auth-context";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useGetBarbershopByOwner } from "@/src/api/get-barbershop";
+import { useGetBarbershopByOwner } from "@/src/api/get-barbershop-by-owner";
 import { useCreateBarbershop } from "@/src/api/create-barbershop";
 import { normalizeImageUrl } from "@/src/hooks/normalize-image-url";
 
@@ -60,7 +60,7 @@ export default function Home() {
   }
 
   return (
-    <div className="h-screen overflow-hidden p-8 bg-zinc-50 dark:bg-black">
+    <div className="h-screen overflow-hidden p-8 ">
       <h1 className="text-2xl font-bold mb-6 dark:text-white">Panel Manager</h1>
 
       <div className="max-w-md bg-white dark:bg-zinc-900 p-6 rounded-xl shadow mb-10">

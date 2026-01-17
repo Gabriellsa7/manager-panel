@@ -1,5 +1,6 @@
 "use client";
 
+import Background from "@/src/components/background";
 import Sidebar from "@/src/components/side-bar";
 
 export default function BarbershopLayout({
@@ -8,9 +9,9 @@ export default function BarbershopLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex">
+    <Background>
       <Sidebar />
       <main className="flex-1">{children}</main>
-    </div>
+    </Background>
   );
 }
