@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAuth } from "@/src/context/auth-context";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const { login } = useAuth();
@@ -10,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,12 +31,19 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+    <div
+      className="flex min-h-screen items-center justify-center 
+  bg-linear-to-b from-zinc-950 via-black to-purple-900"
+    >
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-xl bg-white p-6 shadow dark:bg-zinc-900"
+        className="w-full max-w-sm rounded-xl 
+  bg-black/60 backdrop-blur 
+  p-6 shadow-xl border border-white/10"
       >
-        <h1 className="mb-6 text-center text-xl font-semibold">Login</h1>
+        <h1 className="mb-6 text-center text-xl font-semibold text-white">
+          Login
+        </h1>
 
         {error && (
           <p className="mb-4 rounded bg-red-100 p-2 text-sm text-red-600">
@@ -42,10 +52,11 @@ export default function Login() {
         )}
 
         <div className="mb-4">
-          <label className="mb-1 block text-sm">Email</label>
+          <label className="mb-1 block text-sm text-white">Email</label>
           <input
             type="email"
-            className="w-full rounded border p-2"
+            placeholder="Enter Your Email"
+            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -53,23 +64,40 @@ export default function Login() {
         </div>
 
         <div className="mb-6">
-          <label className="mb-1 block text-sm">Password</label>
+          <label className="mb-1 block text-sm text-white">Password</label>
           <input
             type="password"
-            className="w-full rounded border p-2"
+            placeholder="Enter Your Password"
+            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
+        <div className="flex flex-col gap-6">
+          <div className="flex justify-end">
+            <span className="text-white text-sm">Forgot your password?</span>
+          </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded bg-black py-2 text-white disabled:opacity-60"
-        >
-          {loading ? "Entering..." : "Enter"}
-        </button>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full rounded-lg bg-[#8162FF] py-2 text-white disabled:opacity-60"
+          >
+            {loading ? "Entering..." : "Enter"}
+          </button>
+          <div className="flex justify-center">
+            <span className="text-white text-sm">
+              Don&apos;t have an account?{" "}
+              <button
+                onClick={() => router.replace("/signup")}
+                className="text-[#8162FF] underline cursor-pointer"
+              >
+                Sign up
+              </button>
+            </span>
+          </div>
+        </div>
       </form>
     </div>
   );
