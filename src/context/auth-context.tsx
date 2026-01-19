@@ -78,7 +78,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (loggedUser.barbershopId?.[0]) {
       router.replace(`/barbershop/${loggedUser.barbershopId[0]}/home`);
     } else {
-      router.replace("/signup");
+      router.replace("/create-barbershop");
     }
 
     return loggedUser;
