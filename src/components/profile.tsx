@@ -26,7 +26,7 @@ export default function Profile() {
   if (!user) return null;
 
   return (
-    <div className="flex flex-col items-center text-center gap-3 mt-6">
+    <div className="flex flex-col items-center text-center gap-3 mt-2">
       <ProfileAvatar
         image_url={user.image_url ?? null}
         name={user.name}
