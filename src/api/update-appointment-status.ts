@@ -15,7 +15,7 @@ export const updateAppointmentStatus = async ({
   status,
 }: UpdateAppointmentStatusParams): Promise<Appointment> => {
   const response = await httpRequest.patch<Appointment>(
-    `/appointment/${appointmentId}/status`,
+    `/api/appointment/${appointmentId}/status`,
     {
       status,
     },

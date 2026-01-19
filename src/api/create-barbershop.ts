@@ -26,7 +26,7 @@ export const createBarbershop = async ({
     image_url = await uploadImage(imageFile);
   }
 
-  const response = await httpRequest.post<Barbershop>("/barbershop", {
+  const response = await httpRequest.post<Barbershop>("/api/barbershop", {
     name,
     address,
     description,

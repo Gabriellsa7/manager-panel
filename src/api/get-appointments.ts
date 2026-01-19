@@ -12,7 +12,7 @@ interface GetAppointmentsByBarbershopParams {
 export const getAppointmentsByBarbershop = async ({
   barbershopId,
 }: GetAppointmentsByBarbershopParams): Promise<Appointment[]> => {
-  const path = `/appointment/barbershop/${barbershopId}`;
+  const path = `/api/appointment/barbershop/${barbershopId}`;
 
   try {
     const response = await httpRequest.get<Appointment[]>(path);
