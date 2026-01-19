@@ -68,7 +68,7 @@ export default function AppointmentDetailsPage() {
 
   return (
     <Background>
-      <div className="rounded-xl w-full">
+      <div className="rounded-xl w-full overflow-y-auto scroll-smooth snap-x snap-mandatory overflow-hidden">
         <div className="relative w-full h-[45vh]">
           <Image
             src={appointment.barbershop.image_url || "/boruto.jpeg"}

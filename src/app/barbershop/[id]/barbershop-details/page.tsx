@@ -93,7 +93,7 @@ export default function BarbershopDetails() {
   return (
     <>
       <div className="h-screen flex flex-col bg-zinc-50 dark:bg-black">
-        <div className="p-8 flex flex-col flex-1 ">
+        <div className="px-8 py-4 flex flex-col flex-1 ">
           {barbershop.image_url && (
             <div className="w-full">
               <Image
@@ -101,25 +101,29 @@ export default function BarbershopDetails() {
                 alt={barbershop.name}
                 width={200}
                 height={200}
-                className="w-full h-60 object-cover rounded-xl"
+                className="w-full h-[350px] object-cover rounded-xl"
                 unoptimized
               />
             </div>
           )}
-          <h1 className="text-2xl font-bold">{barbershop.name}</h1>
+          <h1 className="text-2xl font-bold text-white pt-2">
+            {barbershop.name}
+          </h1>
 
           <p className="text-zinc-500">{barbershop.address}</p>
 
-          <p className="text-sm">⭐ {barbershop.rating || "no rating yet"}</p>
+          <p className="text-sm text-white">
+            ⭐ {barbershop.rating || "no rating yet"}
+          </p>
 
           <div className="border-t border-zinc-700 my-6" />
 
-          <h2 className="text-lg font-semibold">About us</h2>
+          <h2 className="text-lg font-semibold text-white">About us</h2>
           <p className="text-zinc-400">{barbershop.description}</p>
 
           <div className="border-t border-zinc-700 my-6" />
 
-          <h2 className="text-lg font-semibold">Services</h2>
+          <h2 className="text-lg font-semibold text-white">Services</h2>
 
           <div className="flex flex-col gap-2">
             {services.length === 0 && (
