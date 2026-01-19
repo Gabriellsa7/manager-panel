@@ -47,7 +47,7 @@ export default function Signup() {
           <input
             type="name"
             placeholder="Enter Your Name"
-            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs"
+            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs focus:outline-none"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -59,7 +59,7 @@ export default function Signup() {
           <input
             type="email"
             placeholder="Enter Your Email"
-            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs"
+            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs focus:outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -71,7 +71,7 @@ export default function Signup() {
           <input
             type="password"
             placeholder="Enter Your Password"
-            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs"
+            className="w-full rounded border-none bg-white p-2 text-black placeholder:text-gray-600 placeholder:text-xs focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

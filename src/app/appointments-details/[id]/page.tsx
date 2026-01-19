@@ -120,7 +120,7 @@ export default function AppointmentDetailsPage() {
             </div>
           </div>
 
-          <div className="flex gap-2 overflow-y-auto custom-scroll pr-2 pb-6">
+          <div className="flex gap-4 p-4 rounded-xl min-w-[320px]">
             {appointment.appointmentservice &&
               appointment.appointmentservice.map((item) => (
                 <div
@@ -130,8 +130,8 @@ export default function AppointmentDetailsPage() {
                   <Image
                     src={item.service.image_url}
                     alt={item.service.name}
-                    width={200}
-                    height={200}
+                    width={100}
+                    height={100}
                     className="rounded-lg object-cover"
                     unoptimized
                   />
@@ -157,7 +157,7 @@ export default function AppointmentDetailsPage() {
           <button
             onClick={() => handleUpdateStatus("CONFIRMED")}
             disabled={isPending}
-            className="flex-1 bg-green-600 text-white py-3 rounded-lg cursor-pointer hover:opacity-40"
+            className="flex-1 bg-purple-600 hover:bg-purple-700 transition text-white py-3 rounded-xl font-medium disabled:opacity-50"
           >
             Confirm
           </button>
@@ -165,7 +165,7 @@ export default function AppointmentDetailsPage() {
           <button
             onClick={() => handleUpdateStatus("CANCELLED")}
             disabled={isPending}
-            className="flex-1 bg-red-600 text-white py-3 rounded-lg cursor-pointer hover:opacity-40"
+            className="flex-1 border border-red-500/40 text-red-400 py-3 rounded-xl hover:bg-red-500/10 transition disabled:opacity-50"
           >
             Cancel
           </button>
@@ -173,7 +173,7 @@ export default function AppointmentDetailsPage() {
           <button
             onClick={() => handleUpdateStatus("DONE")}
             disabled={isPending}
-            className="flex-1 bg-blue-600 text-white py-3 rounded-lg cursor-pointer hover:opacity-40"
+            className="flex-1 bg-zinc-800 text-zinc-300 py-3 rounded-xl hover:bg-zinc-700 transition disabled:opacity-50"
           >
             Done
           </button>

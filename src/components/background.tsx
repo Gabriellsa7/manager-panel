@@ -6,6 +6,6 @@ type BackgroundProps = {
 
 export default function Background({ children }: BackgroundProps) {
   return (
-    <div className="min-h-screen w-full bg-[#141518] flex">{children}</div>
+    <div className="min-h-screen w-full bg-[#050505] flex">{children}</div>
   );
 }

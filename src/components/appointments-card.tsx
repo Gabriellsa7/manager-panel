@@ -26,7 +26,7 @@ export default function AppointmentsCard({
   id,
 }: AppointmentsCardProps) {
   return (
-    <Link href={`/appointments/${id}`}>
+    <Link href={`/appointments-details/${id}`}>
       <div className="bg-[#1E1E26] rounded-xl p-4 mb-4 flex items-center justify-between max-w-[420px]">
         {/* Left side */}
         <div className="flex flex-col gap-3">

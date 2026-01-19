@@ -1,7 +1,7 @@
 "use client";
 
 import { normalizeImageUrl } from "@/src/hooks/normalize-image-url";
-import BarbershopServiceModal from "@/src/components/BarbershopServiceModal";
+import BarbershopServiceModal from "@/src/components/barbershop-service-modal";
 import { useAuth } from "@/src/context/auth-context";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -167,7 +167,7 @@ export default function BarbershopDetails() {
               <div className="pt-4 border-t border-zinc-800">
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="w-full bg-purple-600 px-6 py-3 rounded-lg"
+                  className="w-full bg-purple-600 px-6 py-3 rounded-lg text-white"
                 >
                   Add Barbershop Service
                 </button>
