@@ -6,6 +6,7 @@ import { useAuth } from "@/src/context/auth-context";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import OpeningHoursModal from "@/src/components/opening-hours-modal";
 
 type Barbershop = {
   id: string;
@@ -36,6 +37,7 @@ export default function BarbershopDetails() {
   const [loading, setLoading] = useState(true);
   const [isOwner, setIsOwner] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [isOpeningHoursModalOpen, setIsOpeningHoursModalOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -106,9 +108,21 @@ export default function BarbershopDetails() {
               />
             </div>
           )}
-          <h1 className="text-2xl font-bold text-white pt-2">
-            {barbershop.name}
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold text-white pt-2">
+              {barbershop.name}
+            </h1>
+            <button
+              className="bg-none border-none cursor-pointer"
+              onClick={() => {
+                if (isOwner) {
+                  setIsOpeningHoursModalOpen(true);
+                }
+              }}
+            >
+              <span className="text-[#8162FF]">Opening Hours</span>
+            </button>
+          </div>
 
           <p className="text-zinc-500">{barbershop.address}</p>
 
@@ -184,6 +198,13 @@ export default function BarbershopDetails() {
         <BarbershopServiceModal
           barbershopId={barbershop.id}
           onClose={() => setIsModalOpen(false)}
+          onSuccess={() => setRefreshTrigger((prev) => prev + 1)}
+        />
+      )}
+      {isOpeningHoursModalOpen && isOwner && barbershop && (
+        <OpeningHoursModal
+          barbershopId={barbershop.id}
+          onClose={() => setIsOpeningHoursModalOpen(false)}
           onSuccess={() => setRefreshTrigger((prev) => prev + 1)}
         />
       )}
