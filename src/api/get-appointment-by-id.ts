@@ -12,7 +12,7 @@ export interface GetAppointmentByIdParams {
 export const getAppointmentById = async ({
   appointmentId,
 }: GetAppointmentByIdParams): Promise<Appointment> => {
-  const path = `/api/appointment/${appointmentId}`;
+  const path = `/appointment/${appointmentId}`;
   try {
     const response = await httpRequest.get(path);
 
